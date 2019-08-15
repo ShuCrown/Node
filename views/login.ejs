@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <title>
+        Login
+    </title>
+    <style>
+        .panel .display-center{
+            float: none;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label{
+            font-size: 20px;
+            line-height: 1.8;
+        }
+    </style>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <!-- 登录页 -->
+
+    <div style="margin-top: 70px;margin-bottom:20px;text-align: center;">
+        <img src="<%= logoUri %>" style="border-radius: 50%;margin:0 auto;width: 150px;height: 150px;">
+    </div>
+        
+        <% if(hasError) { %>
+        <div id="myAlert" class="alert alert-warning col-md-5" style="float: none;display: block;margin-left: auto;margin-right: auto;">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Incorrect username or password</strong>
+        </div>
+        <% } %>
+        <div class="panel panel-default col-md-5" style="float: none;display: block;margin-left: auto;margin-right: auto;">
+          
+            <div class="panel-body">
+
+                <div class="row Login-box">
+                    <div class="col-md-8 display-center">
+                        <form action="/login" method="POST" role="form">
+                            <dl class="form-group">
+                                <dt class="input-label">
+                                    <label  autocapitalize="off" autofocus="autofocus" for="user_login">Username or email address</label>
+                                </dt>
+                                <dd>
+                                    <input  autocapitalize="off" autofocus="autofocus" class="form-control input-lg" type="text" id="username" name="username" onchange="checkInfo('username')"/>
+                                    <p id="UsernameNote"></p>
+                                </dd>
+                            </dl>
+                            <dl class="form-group">
+                                <dt class="input-label">
+                                    <label  autocapitalize="off" autofocus="autofocus" for="user_login">Password </label>
+                                    <a class="label-link" href="/findPassword" style="margin-left:10px;">Forget?</a>
+                                </dt>
+                                <dd>
+                                    <input  autocapitalize="off" autofocus="autofocus" class="form-control input-lg" type="password" id="password" name="password"/>
+                                
+                                </dd>
+                            </dl>
+                            
+
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px;">Sign in</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default col-md-5" style="float: none;display: block;margin-left: auto;margin-right: auto;">
+          <div class="col-md-6 display-center">
+                <p style="margin:10px 0;">New ? <a href="/register">Create new account</a></p>
+                
+          </div>
+        </div>
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

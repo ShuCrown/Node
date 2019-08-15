@@ -1,0 +1,17 @@
+     <div>
+        <h3><a href="/post/<%= post.id %>"><%= post.title %></a></h3>
+        <pre><%= post.content %></pre>
+        <div>
+          <span class="tag"><%= post.create_at %></span>
+          <span class="tag right">
+            <span>浏览(<%= post.pv || 0 %>)</span>
+            <% if(post.author.toString()==user) {%>
+             
+              <ul class="dropdown-menu">
+                <a href="/posts/<%= post.id %>/edit">编辑</a>
+                <a href="/posts/<%= post._id %>/remove">删除</a>
+							</ul>
+            <% } %>
+          </span>
+        </div>
+      </div>

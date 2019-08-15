@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		ShuSite
+	</title>
+
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+	<style>
+		li>a {
+			color: white;
+			font-size: 20px;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top" style="background:black;height: 60px;" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				 aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" style="font-size:25px;" href="/">SHU</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav">
+					<li>
+						<form class="js-site-search-form" data-unscoped-search-url="/search" action="/search" accept-charset="UTF-8" method="get"><input
+							 name="utf8" type="hidden" value="&#x2713;" />
+							<div style="padding:10px 5px 0 10px;border-radius: 5px;">
+								<input type="text" class="form-control" data-hotkey="s,/" name="q" value="" placeholder="Search or jump to…">
+
+								<!-- <img src="https://assets-cdn.github.com/images/search-shortcut-hint.svg" alt="" class="mr-2 header-search-key-slash"> -->
+
+							</div>
+						</form>
+					</li>
+				</ul>
+
+
+				<ul class="nav navbar-nav navbar-right">
+					<% if(user) {%>
+						<div class="dropdown" style="padding-top:10px;">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+							 aria-expanded="true">
+								<%= user %>
+									<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="/post">创建文章</a></li>
+								<li><a href="/center">个人信息</a></li>
+								<li class="divider" role="separator"></li>
+								<li><a href="/logout">退出</a></li>
+							</ul>
+						</div>
+						<% }else{ %>
+
+							<li><a href="/login">Sign in</a></li>
+							<li><a href="/register">Sign up</a></li>
+							<% } %>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- 文章内容 -->
+	<div class="column col-sm-6 col-md-4" style="margin:100px 20px;">
+		<% posts.forEach(function(post){ %>
+			<%- include('post-content',{post:post}) %>
+		<% }) %>
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<!-- <script src="http://v3.bootcss.com/assets/js/docs.min.js"></script> -->
+
+</body>
+
+</html>

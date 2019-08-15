@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <title>
+        Register
+    </title>
+    <style>
+        .panel .display-center {
+            float: none;
+            display: block;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        p {
+            color: red;
+        }
+
+        label {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        body {
+            background: url(<%= bg %>) no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <!-- 登录页 -->
+        <div class="panel panel-default col-md-4" style="float: none;display: block;margin: 120px 10px 0 auto;">
+
+            <div class="panel-body">
+
+                <div class="row Login-box">
+                    <div id="myAlert" class="alert alert-warning col-lg-12" style="float: none;display: block;margin: 10px 0 10px auto;display: none;">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>There were problems creating your account.</strong>
+                    </div>
+                    <div class="col-lg-10 display-center">
+
+                        <form action="/register" method="post" role="form" onsubmit="return check();">
+                            <dl class="form-group">
+                                <dt class="input-label">
+                                    <label autocapitalize="off" autofocus="autofocus" for="user_login">Username</label>
+                                </dt>
+                                <dd>
+                                    <input autocapitalize="off" autofocus="autofocus" class="form-control input-lg" type="text" id="username" name="username"
+                                        oninput="checkInfo('username')" />
+                                    <p id="UsernameNote"></p>
+                                </dd>
+                            </dl>
+                            <dl class="form-group">
+                                <dt class="input-label">
+                                    <label autocapitalize="off" autofocus="autofocus" for="user_login">Email</label>
+                                </dt>
+                                <dd>
+                                    <input autocapitalize="off" autofocus="autofocus" class="form-control input-lg" type="text" id="email" name="email" oninput="checkInfo('email')"
+                                    />
+                                    <p id="EmailNote"></p>
+                                </dd>
+                            </dl>
+                            <dl class="form-group">
+                                <dt class="input-label">
+                                    <label autocapitalize="off" autofocus="autofocus" for="user_login">Password</label>
+                                </dt>
+                                <dd>
+                                    <input autocapitalize="off" autofocus="autofocus" class="form-control input-lg" type="password" id="password" name="password"
+                                        minlength="6" />
+
+                                </dd>
+                            </dl>
+                            <button class="btn btn-primary btn-block btn-lg" type="submit" style="margin-top:10px;">Sign
+                                up
+                            </button>
+                            <div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            function checkInfo(path) {
+                if (path == 'username') {
+                    if ($('#username').val() != '') {
+                        $.post('/checkInfo', {
+                            username: $('#username').val(),
+                            path: path
+                        }, function (res) {
+                            $('#UsernameNote').html(res.msg);
+                        });
+                    } else {
+                        $('#UsernameNote').html('');
+                    }
+
+                } else if (path == 'email') {
+                    var reg = new RegExp("^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(\.[0-9A-Za-z]+)+$");
+
+                    if (($('#email').val().trim()) == '') {
+                        $('#EmailNote').html('');
+                    }
+                    else if (reg.test($('#email').val().trim())) {
+                        $.post('/checkInfo', {
+                            email: $('#email').val().trim(),
+                            path: path
+                        }, function (res) {
+                            $('#EmailNote').html(res.msg);
+                        });
+                    } else {
+                        $('#EmailNote').html('Email is invalid or already token.');
+                    }
+
+                }
+
+            }
+            function check() {
+                if ($('#password').val().length >= 6 && $('#UsernameNote').html().trim() == '' && $('#EmailNote').html().trim() == '') {
+                    return true;
+                } else {
+
+                    $('#myAlert').attr("style", "display:block;")
+                    return false;
+                }
+
+            }
+        </script>
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
